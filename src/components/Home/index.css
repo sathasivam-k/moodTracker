@@ -1,0 +1,15 @@
+.calenderButton {
+  display: flex;
+}
+
+.daysFormat {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  width: 300px;
+  gap: 10px;
+  list-style: none;
+}
+
+.listItem {
+  margin-left: 5px;
+}

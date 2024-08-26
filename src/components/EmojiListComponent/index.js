@@ -1,20 +1,20 @@
-import {EmojiLIContainer, EmojiName, EmojiUrl} from './styledComponents'
+import './index.css'
 
 const EmojiListComponent = props => {
   const {emojiDetails, isActive, emojiChange} = props
   const {id, emojiName, emojiUrl} = emojiDetails
-  const textWidth = isActive ? '200px' : '100px'
-  const imageWidth = isActive ? '200px' : '100px'
+  const textWidth = isActive ? 'activeText' : ''
+  const imageWidth = isActive ? 'activeImg' : ''
 
   const onClickEmoji = () => {
-    emojiChange(id)
+    emojiChange(id, emojiUrl)
   }
 
   return (
-    <EmojiLIContainer onClick={onClickEmoji}>
-      <EmojiName textWidth={textWidth}>{emojiName}</EmojiName>
-      <EmojiUrl src={emojiUrl} alt={emojiName} imageWidth={imageWidth} />
-    </EmojiLIContainer>
+    <li onClick={onClickEmoji}>
+      <p className={textWidth}>{emojiName}</p>
+      <img src={emojiUrl} alt={emojiName} className={imageWidth} />
+    </li>
   )
 }
 export default EmojiListComponent

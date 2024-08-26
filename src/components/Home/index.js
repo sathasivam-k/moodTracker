@@ -1,28 +1,8 @@
 import {Component} from 'react'
-import Header from '../Header'
 import EmojiListComponent from '../EmojiListComponent'
+import DaysButton from '../DaysButton'
 
-import {
-  MainContainer,
-  MainHeading,
-  CalenderAndEmojisContainer,
-  CalenderContainer,
-  CalenderHeaderContainer,
-  LeftArrowButton,
-  MonthName,
-  RightArrowButton,
-  CalenderDaysContainer,
-  DaysName,
-  CalenderDatesContainer,
-  DatesList,
-  EmojiesAndListContainer,
-  EmojiesImageULContainer,
-  DayListAndEmojiContainer,
-  EmojiListContainer,
-  EmojiSelectList,
-  EmojiOption,
-  DayListContainer,
-} from './styledComponents'
+import './index.css'
 
 const emojisList = [
   {
@@ -2370,14 +2350,18 @@ let count = 0
 
 class Home extends Component {
   state = {
-    activeEmoji: emojisList[0].id,
     activeEmojiOptionId: emojisList[0].id,
-    activeDaysId: daysList[0].id,
+    activeDaysOptionId: daysList[0].id,
+    activeEmojiId: emojisList[0].id,
     activeMonth: initialMonthsList[0].monthName,
+    monthsList: initialMonthsList,
+    activeEmojiUrl: emojisList[0].emojiUrl,
+    emojisUrl: '',
+    activeDayButton: '',
   }
 
-  emojiChange = id => {
-    this.setState({activeEmoji: id})
+  emojiChange = (id, url) => {
+    this.setState({activeEmojiId: id, activeEmojiUrl: url})
   }
 
   onChangeEmojiOption = event => {
@@ -2385,105 +2369,97 @@ class Home extends Component {
   }
 
   onChangeDaysOption = event => {
-    this.setState({activeDaysId: event.target.value})
+    this.setState({activeDaysOptionId: event.target.value})
   }
 
-  monthDays = () => {
-    const {activeMonth} = this.state
-    const filteredList = initialMonthsList.filter(
-      eachItem => eachItem.monthName === activeMonth,
-    )
-    return filteredList
-  }
-
-  onClickLeft = () => {
-    if (count > 0) {
-      count = count - 1
-    }
-    this.setState({activeMonth: initialMonthsList[count].monthName})
-  }
-
-  onClickRight = () => {
+  increaseFn = () => {
     if (count < 11) {
       count = count + 1
     }
     this.setState({activeMonth: initialMonthsList[count].monthName})
   }
 
+  decreaseFn = () => {
+    if (count > 0) {
+      count = count - 1
+    }
+    this.setState({activeMonth: initialMonthsList[count].monthName})
+  }
+
+  displayEmoji = value => {
+    const {activeEmojiUrl, monthsList} = this.state
+    this.setState({...monthsList[count].dates[value], emojiUrl: activeEmojiUrl})
+    console.log(monthsList[count])
+  }
+
   render() {
-    const {activeEmoji, activeEmojiOptionId, activeDaysId, activeMonth} =
-      this.state
-    const filteredDates = this.monthDays
+    const {
+      activeEmojiOptionId,
+      activeDaysOptionId,
+      activeEmojiId,
+      activeMonth,
+      monthsList,
+      emojisUrl,
+      activeDayButton,
+    } = this.state
     return (
-      <MainContainer>
-        <Header />
-        <MainHeading>Moods in a Month</MainHeading>
-        <CalenderAndEmojisContainer>
-          <CalenderContainer>
-            <CalenderHeaderContainer>
-              <LeftArrowButton onClick={this.onClickLeft}>
-                {' '}
-                left{' '}
-              </LeftArrowButton>
-              <MonthName>{activeMonth}</MonthName>
-              <RightArrowButton onClick={this.onClickRight}>
-                {' '}
-                right{' '}
-              </RightArrowButton>
-            </CalenderHeaderContainer>
-            <CalenderDaysContainer>
-              {daysList.map(eachItems => (
-                <DaysName>{eachItems.day}</DaysName>
-              ))}
-            </CalenderDaysContainer>
-            <CalenderDatesContainer>
-              {filteredDates.map(eachItem => (
-                <DatesList>{eachItem.date}</DatesList>
-              ))}
-            </CalenderDatesContainer>
-          </CalenderContainer>
-          <EmojiesAndListContainer>
-            <EmojiesImageULContainer>
-              {emojisList.map(eachItem => (
-                <EmojiListComponent
-                  key={eachItem.id}
-                  emojiDetails={eachItem}
-                  isActive={eachItem.id === activeEmoji}
-                  emojiChange={this.emojiChange}
-                />
-              ))}
-            </EmojiesImageULContainer>
-            <DayListAndEmojiContainer>
-              <EmojiListContainer>
-                <EmojiSelectList
-                  value={activeEmojiOptionId}
-                  onChange={this.onChangeEmojiOption}
-                >
-                  {emojisList.map(eachItem => (
-                    <EmojiOption key={eachItem.id} value={eachItem.id}>
-                      {eachItem.emojiName}
-                    </EmojiOption>
-                  ))}
-                </EmojiSelectList>
-              </EmojiListContainer>
-              <DayListContainer>
-                <EmojiSelectList
-                  value={activeDaysId}
-                  onChange={this.onChangeDaysOption}
-                >
-                  {daysList.map(eachItem => (
-                    <EmojiOption key={eachItem.id} value={eachItem.id}>
-                      {eachItem.day}
-                    </EmojiOption>
-                  ))}
-                </EmojiSelectList>
-              </DayListContainer>
-            </DayListAndEmojiContainer>
-          </EmojiesAndListContainer>
-        </CalenderAndEmojisContainer>
-      </MainContainer>
+      <div>
+        <div className="calenderButton">
+          <button onClick={this.decreaseFn}>{'<'}</button>
+          <p>{activeMonth}</p>
+          <button onClick={this.increaseFn}>{'>'}</button>
+        </div>
+        <ul className="daysFormat">
+          {daysList.map(eachItem => (
+            <li>
+              <p className="listItem">{eachItem.day}</p>
+            </li>
+          ))}
+        </ul>
+        <ul className="daysFormat">
+          {monthsList[count].dates.map(eachItem => (
+            <DaysButton
+              daysDetails={eachItem}
+              key={eachItem.id}
+              displayEmoji={this.displayEmoji}
+              emojisUrl={emojisUrl}
+              isActive={eachItem.id === activeDayButton}
+            />
+          ))}
+        </ul>
+        <div>
+          <select
+            value={activeEmojiOptionId}
+            onChange={this.onChangeEmojiOption}
+          >
+            {emojisList.map(eachItem => (
+              <option key={eachItem.id} value={eachItem.id}>
+                {eachItem.emojiName}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <select value={activeDaysOptionId} onChange={this.onChangeDaysOption}>
+            {daysList.map(eachItem => (
+              <option key={eachItem.id} value={eachItem.id}>
+                {eachItem.day}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div>
+          {emojisList.map(eachItem => (
+            <EmojiListComponent
+              key={eachItem.id}
+              emojiDetails={eachItem}
+              isActive={eachItem.id === activeEmojiId}
+              emojiChange={this.emojiChange}
+            />
+          ))}
+        </div>
+      </div>
     )
   }
 }
-
 export default Home
