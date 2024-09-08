@@ -2351,17 +2351,22 @@ let count = 0
 class Home extends Component {
   state = {
     activeEmojiOptionId: emojisList[0].id,
-    activeDaysOptionId: daysList[0].id,
+    activeDaysOptionId: daysList[0].dayNumber,
     activeEmojiId: emojisList[0].id,
     activeMonth: initialMonthsList[0].monthName,
     monthsList: initialMonthsList,
     activeEmojiUrl: emojisList[0].emojiUrl,
+    activeEmojiName: emojisList[0].emojiName,
     emojisUrl: '',
     activeDayButton: '',
   }
 
-  emojiChange = (id, url) => {
-    this.setState({activeEmojiId: id, activeEmojiUrl: url})
+  emojiChange = (id, url, name) => {
+    this.setState({
+      activeEmojiId: id,
+      activeEmojiUrl: url,
+      activeEmojiName: name,
+    })
   }
 
   onChangeEmojiOption = event => {
@@ -2374,22 +2379,49 @@ class Home extends Component {
 
   increaseFn = () => {
     if (count < 11) {
-      count = count + 1
+      count += 1
     }
     this.setState({activeMonth: initialMonthsList[count].monthName})
   }
 
   decreaseFn = () => {
     if (count > 0) {
-      count = count - 1
+      count -= 1
     }
     this.setState({activeMonth: initialMonthsList[count].monthName})
   }
 
   displayEmoji = value => {
-    const {activeEmojiUrl, monthsList} = this.state
-    this.setState({...monthsList[count].dates[value], emojiUrl: activeEmojiUrl})
-    console.log(monthsList[count])
+    const {activeEmojiUrl, monthsList, activeEmojiName} = this.state
+    const updatedDates = [...monthsList[count].dates]
+    if (updatedDates[value].emojiUrl === '') {
+      updatedDates[value].emojiUrl = activeEmojiUrl
+      updatedDates[value].emojiName = activeEmojiName
+    } else if (updatedDates[value].emojiUrl === activeEmojiUrl) {
+      updatedDates[value].emojiUrl = ''
+      updatedDates[value].emojiName = ''
+    } else {
+      updatedDates[value].emojiUrl = activeEmojiUrl
+      updatedDates[value].emojiName = activeEmojiName
+    }
+
+    const updatedMonthsList = [...monthsList]
+    updatedMonthsList[count].dates = updatedDates
+    this.setState({monthsList: updatedMonthsList})
+  }
+
+  emojiCountFn = () => {
+    const {activeDaysOptionId, activeEmojiName, monthsList} = this.state
+    let i = activeDaysOptionId
+    let emojiesCount = 0
+    if (i < 31) {
+      if (monthsList[count].dates[i - 1].emojiName === activeEmojiName) {
+        emojiesCount += 1
+      }
+      i += 7
+    }
+
+    return <p>{emojiesCount}</p>
   }
 
   render() {
@@ -2402,6 +2434,7 @@ class Home extends Component {
       emojisUrl,
       activeDayButton,
     } = this.state
+
     return (
       <div>
         <div className="calenderButton">
@@ -2439,10 +2472,11 @@ class Home extends Component {
             ))}
           </select>
         </div>
+        <div>{this.emojiCountFn()}</div>
         <div>
           <select value={activeDaysOptionId} onChange={this.onChangeDaysOption}>
             {daysList.map(eachItem => (
-              <option key={eachItem.id} value={eachItem.id}>
+              <option key={eachItem.dayNumber} value={eachItem.dayNumber}>
                 {eachItem.day}
               </option>
             ))}

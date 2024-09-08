@@ -7,7 +7,7 @@ const EmojiListComponent = props => {
   const imageWidth = isActive ? 'activeImg' : ''
 
   const onClickEmoji = () => {
-    emojiChange(id, emojiUrl)
+    emojiChange(id, emojiUrl, emojiName)
   }
 
   return (
