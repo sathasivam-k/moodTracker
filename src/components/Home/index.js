@@ -2350,7 +2350,7 @@ let count = 0
 
 class Home extends Component {
   state = {
-    activeEmojiOptionId: emojisList[0].id,
+    activeEmojiOptionId: emojisList[0].emojiName,
     activeDaysOptionId: daysList[0].dayNumber,
     activeEmojiId: emojisList[0].id,
     activeMonth: initialMonthsList[0].monthName,
@@ -2411,15 +2411,20 @@ class Home extends Component {
   }
 
   emojiCountFn = () => {
-    const {activeDaysOptionId, activeEmojiName, monthsList} = this.state
+    const {activeDaysOptionId, monthsList, activeEmojiOptionId} = this.state
     let i = activeDaysOptionId
     let emojiesCount = 0
-    if (i < 31) {
-      if (monthsList[count].dates[i - 1].emojiName === activeEmojiName) {
-        emojiesCount += 1
+    const emojiSearch = [...monthsList[count].dates]
+    emojiSearch.forEach((item, index) => {
+      if (index === i - 1) {
+        if (item.emojiName === activeEmojiOptionId) {
+          emojiesCount += 1
+        }
+        i += 7
       }
-      i += 7
-    }
+
+      console.log(i)
+    })
 
     return <p>{emojiesCount}</p>
   }
@@ -2466,7 +2471,7 @@ class Home extends Component {
             onChange={this.onChangeEmojiOption}
           >
             {emojisList.map(eachItem => (
-              <option key={eachItem.id} value={eachItem.id}>
+              <option key={eachItem.emojiName} value={eachItem.emojiName}>
                 {eachItem.emojiName}
               </option>
             ))}

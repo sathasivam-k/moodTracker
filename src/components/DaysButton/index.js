@@ -6,7 +6,7 @@ const DaysButton = props => {
   const emojiIcon = isActive ? emojisUrl : ''
 
   const onClickEmoji = () => {
-    let value = parseInt(date)
+    const value = parseInt(date)
 
     displayEmoji(value - 1)
   }
