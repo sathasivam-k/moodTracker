@@ -1,9 +1,8 @@
 import './index.css'
 
 const DaysButton = props => {
-  const {daysDetails, displayEmoji, emojisUrl, isActive} = props
-  const {id, date, emojiUrl} = daysDetails
-  const emojiIcon = isActive ? emojisUrl : ''
+  const {daysDetails, displayEmoji} = props
+  const {date, emojiUrl} = daysDetails
 
   const onClickEmoji = () => {
     const value = parseInt(date)
@@ -13,7 +12,7 @@ const DaysButton = props => {
 
   return (
     <li className="listItems">
-      <button onClick={onClickEmoji}>
+      <button type="button" onClick={onClickEmoji}>
         <p>{date}</p>
         <img src={emojiUrl} />
       </button>
