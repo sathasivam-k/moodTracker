@@ -2349,6 +2349,39 @@ const initialMonthsList = [
 
 let count = 0
 
+const emojiesCountData = [
+  {
+    id: 1,
+    emojiUrl:
+      'https://assets.ccbp.in/frontend/react-js/monthly-emojis/monthly-emojis-very-happy.png',
+    count: 0,
+  },
+  {
+    id: 2,
+    emojiUrl:
+      'https://assets.ccbp.in/frontend/react-js/monthly-emojis/monthly-emojis-happy.png',
+    count: 0,
+  },
+  {
+    id: 3,
+    emojiUrl:
+      'https://assets.ccbp.in/frontend/react-js/monthly-emojis/monthly-emojis-neutral.png',
+    count: 0,
+  },
+  {
+    id: 4,
+    emojiUrl:
+      'https://assets.ccbp.in/frontend/react-js/monthly-emojis/monthly-emojis-sad.png',
+    count: 0,
+  },
+  {
+    id: 5,
+    emojiUrl:
+      'https://assets.ccbp.in/frontend/react-js/monthly-emojis/monthly-emojis-very-sad.png',
+    count: 0,
+  },
+]
+
 class Home extends Component {
   state = {
     activeEmojiOptionId: emojisList[0].emojiName,
@@ -2360,6 +2393,8 @@ class Home extends Component {
     activeEmojiName: emojisList[0].emojiName,
     emojisUrl: '',
     activeDayButton: '',
+    activeMonthFilter: initialMonthsList[0].month,
+    emojiesMonthwiseCount: emojiesCountData,
   }
 
   emojiChange = (id, url, name) => {
@@ -2376,6 +2411,10 @@ class Home extends Component {
 
   onChangeDaysOption = event => {
     this.setState({activeDaysOptionId: event.target.value})
+  }
+
+  onChangeActiveMonthName = event => {
+    this.setState({activeMonthFilter: event})
   }
 
   increaseFn = () => {
@@ -2444,8 +2483,8 @@ class Home extends Component {
     return <p>{emojiesCount}</p>
   }
 
-  overAllEmojiCountFn = () => {
-    const {monthsList} = this.state
+  reChartFn = () => {
+    const {monthsList, emojiesMonthwiseCount, activeMonthFilter} = this.state
 
     let veryHappyCount = 0
     let happyCount = 0
@@ -2453,50 +2492,27 @@ class Home extends Component {
     let sadCount = 0
     let verySadCount = 0
 
-    monthsList.forEach(item => {
-      item.dates.forEach(dateItem => {
-        if (dateItem.emojiName === 'Very Happy') {
-          veryHappyCount += 1
-        } else if (dateItem.emojiName === 'Happy') {
-          happyCount += 1
-        } else if (dateItem.emojiName === 'Neutral') {
-          neutralCount += 1
-        } else if (dateItem.emojiName === 'Sad') {
-          sadCount += 1
-        } else if (dateItem.emojiName === 'Very Sad') {
-          verySadCount += 1
-        }
-      })
+    monthsList[activeMonthFilter - 1].dates.forEach(dateItem => {
+      if (dateItem.emojiName === 'Very Happy') {
+        veryHappyCount += 1
+      } else if (dateItem.emojiName === 'Happy') {
+        happyCount += 1
+      } else if (dateItem.emojiName === 'Neutral') {
+        neutralCount += 1
+      } else if (dateItem.emojiName === 'Sad') {
+        sadCount += 1
+      } else if (dateItem.emojiName === 'Very Sad') {
+        verySadCount += 1
+      }
     })
-    return (
-      <div className="emojiiAlignment">
-        <div>
-          <p>Very Happy</p>
-          <img src={emojisList[0].emojiUrl} />
-          <p>{veryHappyCount}</p>
-        </div>
-        <div>
-          <p>Happy</p>
-          <img src={emojisList[1].emojiUrl} />
-          <p>{happyCount}</p>
-        </div>
-        <div>
-          <p>Neutral</p>
-          <img src={emojisList[2].emojiUrl} />
-          <p>{neutralCount}</p>
-        </div>
-        <div>
-          <p>Sad</p>
-          <img src={emojisList[3].emojiUrl} />
-          <p>{sadCount}</p>
-        </div>
-        <div>
-          <p>Very Sad</p>
-          <img src={emojisList[4].emojiUrl} />
-          <p>{verySadCount}</p>
-        </div>
-      </div>
-    )
+
+    emojiesMonthwiseCount[0].count = veryHappyCount
+    emojiesMonthwiseCount[1].count = happyCount
+    emojiesMonthwiseCount[2].count = neutralCount
+    emojiesMonthwiseCount[3].count = sadCount
+    emojiesMonthwiseCount[4].count = verySadCount
+
+    return <div />
   }
 
   render() {
@@ -2508,6 +2524,8 @@ class Home extends Component {
       monthsList,
       emojisUrl,
       activeDayButton,
+      activeMonthFilter,
+      emojiesMonthwiseCount,
     } = this.state
 
     return (
@@ -2567,10 +2585,16 @@ class Home extends Component {
             />
           ))}
         </div>
-        <div>{this.overAllEmojiCountFn()}</div>
         <div>
-          <Report activeDay={monthsList} />
+          <Report
+            monthsListDetails={monthsList}
+            emojisList={emojisList}
+            activeMonth={activeMonthFilter}
+            onChangeActiveMonthName={this.onChangeActiveMonthName}
+            chartData={emojiesMonthwiseCount}
+          />
         </div>
+        <div>{this.reChartFn()}</div>
       </div>
     )
   }
