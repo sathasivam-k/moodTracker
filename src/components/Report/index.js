@@ -1,3 +1,5 @@
+import {BarChart, Bar, XAxis, YAxis, ResponsiveContainer} from 'recharts'
+
 import './index.css'
 
 const Report = props => {
@@ -8,6 +10,13 @@ const Report = props => {
     onChangeActiveMonthName,
     chartData,
   } = props
+
+  const DataFormatter = number => {
+    if (number > 1000) {
+      return `${(number / 1000).toString()}k`
+    }
+    return number.toString()
+  }
 
   console.log(chartData)
 
@@ -71,6 +80,32 @@ const Report = props => {
             </option>
           ))}
         </select>
+      </div>
+      <div>
+        <ResponsiveContainer width="100%" height={500}>
+          <BarChart
+            data={chartData}
+            margin={{
+              top: 5,
+            }}
+          >
+            <XAxis
+              dataKey="emojiUrl"
+              tick={{
+                stroke: 'gray',
+                strokeWidth: 1,
+              }}
+            />
+            <YAxis
+              tickFormatter={DataFormatter}
+              tick={{
+                stroke: 'gray',
+                strokeWidth: 0,
+              }}
+            />
+            <Bar dataKey="count" fill="#1f77b4" barSize="20%" />
+          </BarChart>
+        </ResponsiveContainer>
       </div>
     </div>
   )
