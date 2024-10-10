@@ -1,0 +1,63 @@
+.reportBg {
+  background-image: url('https://assets.ccbp.in/frontend/react-js/nxt-slides/monthly-emojis-bg.png');
+  background-size: cover;
+  height: 150vh;
+}
+.overallHeading {
+  color: #ffffff;
+  margin-left: 20px;
+  font-family: 'Roboto';
+  font-size: 30px;
+}
+.overallEmojiBg {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.overallEmojiCtn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 0px solid;
+  background-color: #343243;
+  width: 200px;
+  height: 200px;
+  border-radius: 10px;
+}
+.reportEmojiHeading {
+  color: #ffffff;
+  font-family: 'Roboto';
+  font-size: 20px;
+  font-weight: 500;
+}
+.reportEmojiSize {
+  width: 50px;
+}
+.emojiCountText {
+  color: #ffffff;
+  font-family: 'Roboto';
+  font-size: 23px;
+  font-weight: 500;
+}
+.reportSelect {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.reportSelectList {
+  margin-top: 30px;
+  margin-right: 20px;
+  color: #000000;
+  background-color: #ffffff;
+  font-size: 15px;
+  width: 140px;
+  height: 40px;
+  border: 1px solid #4e5d72;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: 500;
+  font-family: 'Roboto';
+}
+.chartBg {
+  margin-top: 30px;
+}

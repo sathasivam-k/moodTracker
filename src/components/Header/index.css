@@ -1,0 +1,53 @@
+.headerBg {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: #42404d;
+}
+
+.heading {
+  color: #ffbe38;
+  font-family: 'Roboto';
+  margin-left: 25px;
+}
+
+.homeBg {
+  display: flex;
+  align-items: center;
+}
+
+.linkProp {
+  text-decoration: none;
+}
+
+.home {
+  font-family: 'Roboto';
+  color: #ffffff;
+  margin-right: 20px;
+  font-size: 23px;
+}
+
+.report {
+  font-family: 'Roboto';
+  color: #4e5d72;
+  margin-right: 20px;
+  font-size: 23px;
+}
+
+.button0 {
+  border: 2px solid;
+  height: 35px;
+  width: 85px;
+  border-radius: 5px;
+  margin-right: 20px;
+  font-size: 18px;
+  font-family: 'Roboto';
+  background-color: transparent;
+  color: #ffbe38;
+  font-weight: 600;
+}
+.headerBtn{
+  background-color: transparent;
+  border: 0px solid;
+}

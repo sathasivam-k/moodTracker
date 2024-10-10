@@ -2,19 +2,7 @@ import {Component} from 'react'
 import Cookies from 'js-cookie'
 import {Redirect} from 'react-router-dom'
 
-import {
-  InputLabel,
-  UserInput,
-  CheckBoxContainer,
-  CheckBox,
-  ShowPassword,
-  LoginContainer,
-  FormContainer,
-  LogoImg,
-  InputContainer,
-  SubmitButton,
-  SubmitErrorMsg,
-} from './styledComponents'
+import './index.css'
 
 class LoginForm extends Component {
   state = {
@@ -40,16 +28,19 @@ class LoginForm extends Component {
   renderUsername = () => {
     const {username} = this.state
     return (
-      <>
-        <InputLabel htmlFor="username">USERNAME</InputLabel>
-        <UserInput
+      <div className="usernameCtn">
+        <label htmlFor="username" className="userText">
+          USERNAME
+        </label>
+        <input
           type="text"
           id="username"
           value={username}
-          placeholder="Username"
+          placeholder="rahul"
           onChange={this.onUsername}
+          className="inputctn"
         />
-      </>
+      </div>
     )
   }
 
@@ -57,24 +48,23 @@ class LoginForm extends Component {
     const {password, showPassword} = this.state
     const inputType = showPassword ? 'text' : 'password'
     return (
-      <>
-        <InputLabel htmlFor="password">PASSWORD</InputLabel>
-        <UserInput
+      <div className="usernameCtn">
+        <label htmlFor="password" className="userText">
+          PASSWORD
+        </label>
+        <input
           type={inputType}
           id="password"
           value={password}
-          placeholder="Password"
+          placeholder="rahul@2021"
           onChange={this.onPassword}
+          className="inputctn"
         />
-        <CheckBoxContainer>
-          <CheckBox
-            type="checkbox"
-            id="checkbox"
-            onChange={this.onShowPassword}
-          />
-          <ShowPassword htmlFor="checkbox">Show Password</ShowPassword>
-        </CheckBoxContainer>
-      </>
+        <div className="checkShow">
+          <input type="checkbox" id="checkbox" onChange={this.onShowPassword} />
+          <p htmlFor="checkbox">Show Password</p>
+        </div>
+      </div>
     )
   }
 
@@ -117,18 +107,17 @@ class LoginForm extends Component {
       return <Redirect to="/" />
     }
     return (
-      <LoginContainer>
-        <FormContainer onSubmit={this.submitForm}>
-          <LogoImg
-            src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
-            alt="website logo"
-          />
-          <InputContainer>{this.renderUsername()}</InputContainer>
-          <InputContainer>{this.renderPassword()}</InputContainer>
-          <SubmitButton type="submit">Login</SubmitButton>
-          {showSubmitError && <SubmitErrorMsg>*{errorMsg}</SubmitErrorMsg>}
-        </FormContainer>
-      </LoginContainer>
+      <div className="loginBg">
+        <form onSubmit={this.submitForm} className="loginForm">
+          <h1 className="loginHeading">Daily Mood Tracker</h1>
+          <div>{this.renderUsername()}</div>
+          <div>{this.renderPassword()}</div>
+          <button type="submit" className="loginBtn">
+            Login
+          </button>
+          {showSubmitError && <p className="errorMss">*{errorMsg}</p>}
+        </form>
+      </div>
     )
   }
 }

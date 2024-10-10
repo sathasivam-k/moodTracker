@@ -1,6 +1,28 @@
 .activeImg {
-  width: 100px;
+  width: 65px;
 }
 .activeText {
-  font-size: 25px;
+  color: #ffffff;
+  font-family: 'Roboto';
+  text-align: center;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.listItem1 {
+  list-style: none;
+  padding: 10px;
+  margin-left: 5px;
+}
+
+.inActiveText {
+  color: #ffffff;
+  font-family: 'Roboto';
+  text-align: center;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.inActiveImg {
+  width: 50px;
 }

@@ -1,15 +1,189 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+}
+
 .calenderButton {
   display: flex;
+  justify-content: space-around;
+}
+.btnCtn1 {
+  margin-top: 4px;
+  text-align: center;
+  width: 100px;
+  display: flex;
+  justify-content: flex-start;
+}
+.btnCtn2 {
+  margin-top: 4px;
+  text-align: center;
+  display: flex;
+  justify-content: flex-end;
+  width: 100px;
+}
+.monthCtn {
+  width: 180px;
+  text-align: center;
+}
+.button1 {
+  border: none;
+  width: 40px;
+  background-color: transparent;
+}
+
+.button2 {
+  border: none;
+  width: 40px;
+  background-color: transparent;
+}
+
+.monthName {
+  color: #ffffff;
+  font-size: 25px;
+  font-family: 'Roboto';
+  text-align: center;
+  font-weight: 500;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.HomeBg {
+  background-image: url('https://assets.ccbp.in/frontend/react-js/nxt-slides/monthly-emojis-bg.png');
+  background-size: cover;
+  height: 125vh;
+}
+.homeBg1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.heading {
+  font-family: 'Roboto';
+  color: #ffbe38;
+  text-align: center;
+}
+
+.icons {
+  background-color: transparent;
+  border: none;
+}
+.calEmojiBg1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 1350px;
+  height: 550px;
+}
+
+.calEmojiBg {
+  border-radius: 20px;
+  width: 750px;
+  height: 550px;
+  display: flex;
+  flex-direction: column;
+  background: #131212;
+  align-items: center;
+}
+
+.emojiListBg {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.emojiListBg1 {
+  border: 0px solid;
+  border-radius: 20px;
+  width: 500px;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  background-color: #131212;
 }
 
 .daysFormat {
   display: grid;
+  justify-content: center;
   grid-template-columns: repeat(7, 1fr);
-  width: 300px;
-  gap: 10px;
+  width: 500px;
+  height: 50px;
+  gap: 75px;
   list-style: none;
+  margin-left: -30px;
+}
+.datesFormat {
+  display: grid;
+  flex-direction: row;
+  justify-content: center;
+  grid-template-columns: repeat(7, 1fr);
+  width: 500px;
+  height: 350px;
+  gap: 20px;
+  list-style: none;
+  margin-left: -30px;
 }
 
-.listItem {
-  margin-left: 5px;
+.dayStyle {
+  color: #ffffff;
+  font-family: 'Roboto';
+  font-size: 19px;
+  font-weight: 500;
+}
+.emojiNameSelect {
+  color: #ffffff;
+  background-color: #343243;
+  font-size: 15px;
+  width: 140px;
+  height: 40px;
+  border: 1px solid #4e5d72;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: 500;
+  font-family: 'Roboto';
+}
+.daySelect {
+  color: #ffffff;
+  background-color: #343243;
+  font-size: 15px;
+  width: 140px;
+  height: 40px;
+  border: 1px solid #4e5d72;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: 500;
+  font-family: 'Roboto';
+  margin-left: 50px;
+}
+
+.selectBg {
+  display: flex;
+  flex-direction: row;
+  margin-top: 50px;
+  padding: 10px;
+}
+
+.selectCountBg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 0px solid;
+  border-radius: 20px;
+  background-color: #131212;
+  width: 500px;
+  height: 300px;
+  margin-top: 30px;
+}
+
+.emojiCountText {
+  color: #ffffff;
+  margin-top: 30px;
+  font-family: 'Roboto';
+  font-weight: 500;
 }

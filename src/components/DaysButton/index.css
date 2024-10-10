@@ -1,3 +1,30 @@
 .listItems {
   list-style: none;
 }
+
+.daEmCtn {
+  display: flex;
+  justify-content: center;
+}
+
+.dayButton {
+  border: 0px solid;
+  border-radius: 10px;
+  width: 85px;
+  height: 40px;
+  top: 180px;
+  left: 463px;
+  background-color: #343243;
+}
+
+.btnEmoji {
+  width: 35px;
+}
+
+.dateStyle {
+  font-family: 'Roboto';
+  color: #ffffff;
+  margin-top: 8px;
+  font-size: 15px;
+  font-weight: 500;
+}
