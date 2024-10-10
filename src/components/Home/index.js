@@ -48,7 +48,7 @@ const Home = () => (
                   </button>
                 </div>
                 <div className="monthCtn">
-                  <p className="monthName">{activeMonth}</p>
+                  <h1 className="monthName">{activeMonth}</h1>
                 </div>
                 <div className="btnCtn2">
                   {/* eslint-disable-next-line */}

@@ -60,7 +60,7 @@ const Report = () => (
         <div className="reportBg">
           <Header />
           {reChartFn()}
-          <h1 className="overallHeading">Overall Emoji Report</h1>
+          <h1 className="overallHeading">Overall Emojis Reports</h1>
           <div className="overallEmojiBg">
             <div className="overallEmojiCtn">
               <p className="reportEmojiHeading">Very Happy</p>
