@@ -62,7 +62,7 @@ class LoginForm extends Component {
         />
         <div className="checkShow">
           <input type="checkbox" id="checkbox" onChange={this.onShowPassword} />
-          <p htmlFor="checkbox">Show Password</p>
+          <label htmlFor="checkbox">Show Password</label>
         </div>
       </div>
     )

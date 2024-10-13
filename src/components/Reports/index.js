@@ -1,17 +1,10 @@
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  ResponsiveContainer,
-  CartesianGrid,
-} from 'recharts'
+import {BarChart, Bar, XAxis, YAxis, CartesianGrid} from 'recharts'
 import Header from '../Header'
 import MoodTrackerContext from '../../context/MoodTrackerContext'
 
 import './index.css'
 
-const Report = () => (
+const Reports = () => (
   <MoodTrackerContext.Consumer>
     {value => {
       const {
@@ -62,7 +55,7 @@ const Report = () => (
           {reChartFn()}
           <h1 className="overallHeading">Overall Emojis Reports</h1>
           <div className="overallEmojiBg">
-            <div className="overallEmojiCtn">
+            <div className="card">
               <p className="reportEmojiHeading">Very Happy</p>
               <img
                 src={emojisList[0].emojiUrl}
@@ -71,7 +64,7 @@ const Report = () => (
               />
               <p className="emojiCountText">{veryHappyCount}</p>
             </div>
-            <div className="overallEmojiCtn">
+            <div className="card">
               <p className="reportEmojiHeading">Happy</p>
               <img
                 src={emojisList[1].emojiUrl}
@@ -80,7 +73,7 @@ const Report = () => (
               />
               <p className="emojiCountText">{happyCount}</p>
             </div>
-            <div className="overallEmojiCtn">
+            <div className="card">
               <p className="reportEmojiHeading">Neutral</p>
               <img
                 src={emojisList[2].emojiUrl}
@@ -89,7 +82,7 @@ const Report = () => (
               />
               <p className="emojiCountText">{neutralCount}</p>
             </div>
-            <div className="overallEmojiCtn">
+            <div className="card">
               <p className="reportEmojiHeading">Sad</p>
               <img
                 src={emojisList[3].emojiUrl}
@@ -98,7 +91,7 @@ const Report = () => (
               />
               <p className="emojiCountText">{sadCount}</p>
             </div>
-            <div className="overallEmojiCtn">
+            <div className="card">
               <p className="reportEmojiHeading">Very Sad</p>
               <img
                 src={emojisList[4].emojiUrl}
@@ -110,7 +103,7 @@ const Report = () => (
           </div>
 
           <div className="reportSelect">
-            <h1 className="overallHeading">Monthly Reports</h1>
+            <p className="overallHeading">Monthly Reports</p>
             <div>
               <select
                 value={activeMonthFilter}
@@ -127,27 +120,37 @@ const Report = () => (
           </div>
 
           <div className="chartBg">
-            <ResponsiveContainer width="95%" aspect={4} height={400}>
-              <BarChart
-                data={emojiesMonthwiseCount}
-                margin={{
-                  top: 5,
-                  right: 30,
-                  left: 80,
-                  bottom: 5,
-                }}
-              >
-                <CartesianGrid strokeDasharray="5 5" />
-                <XAxis dataKey="id" strokeDasharray="5 5" />
-                <YAxis tickFormatter={DataFormatter} strokeDasharray="5 5" />
-                <Bar
-                  dataKey="count"
-                  fill="#ffbe38"
-                  barSize={80}
-                  radius={[10, 10, 0, 0]}
-                />
-              </BarChart>
-            </ResponsiveContainer>
+            <BarChart
+              data={emojiesMonthwiseCount}
+              width={1250}
+              height={400}
+              margin={{
+                top: 5,
+                right: 30,
+                left: 80,
+                bottom: 5,
+              }}
+            >
+              <CartesianGrid strokeDasharray="5 5" />
+              <XAxis
+                dataKey="id"
+                strokeDasharray="5 5"
+                axisLine={false}
+                tickLine={false}
+              />
+              <YAxis
+                tickFormatter={DataFormatter}
+                strokeDasharray="5 5"
+                axisLine={false}
+                tickLine={false}
+              />
+              <Bar
+                dataKey="count"
+                fill="#ffbe38"
+                barSize={80}
+                radius={[10, 10, 0, 0]}
+              />
+            </BarChart>
           </div>
         </div>
       )
@@ -155,4 +158,4 @@ const Report = () => (
   </MoodTrackerContext.Consumer>
 )
 
-export default Report
+export default Reports

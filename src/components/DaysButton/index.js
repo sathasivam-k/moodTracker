@@ -14,14 +14,14 @@ const DaysButton = props => (
       }
 
       return (
-        <li className="listItems">
-          <button type="button" onClick={onClickEmoji} className="dayButton">
-            <div className="daEmCtn">
+        <li className='listItems'>
+          <button type='button' onClick={onClickEmoji} className='dayButton'>
+            <div className='daEmCtn'>
               <div>
-                <p className="dateStyle">{date}</p>
+                <p className='dateStyle'>{date}</p>
               </div>
               <div>
-                <img src={emojiUrl} className="btnEmoji" alt="" />
+                <img src={emojiUrl} className='btnEmoji' alt='' />
               </div>
             </div>
           </button>

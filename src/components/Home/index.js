@@ -37,6 +37,7 @@ const Home = () => (
                   <button
                     type="button"
                     onClick={decreaseFn}
+                    data-testid="previous-button"
                     className="button1"
                   >
                     {/* eslint-disable-next-line */}
@@ -55,6 +56,7 @@ const Home = () => (
                   <button
                     type="button"
                     onClick={increaseFn}
+                    data-testid="next-button"
                     className="button2"
                   >
                     <GoChevronRight

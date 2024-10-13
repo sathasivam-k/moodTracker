@@ -39,7 +39,7 @@ const Header = props => (
               type="button"
               className="headerBtn"
             >
-              <Link to="/report" className="linkProp">
+              <Link to="/reports" className="linkProp">
                 <p className={classNameRepoActive}>Reports</p>
               </Link>
             </button>

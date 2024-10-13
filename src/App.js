@@ -3,7 +3,7 @@ import {Route, Switch, Redirect} from 'react-router-dom'
 
 import MoodTrackerContext from './context/MoodTrackerContext'
 import Home from './components/Home'
-import Report from './components/Report'
+import Reports from './components/Reports'
 import Login from './components/Login'
 import ProtectedRoute from './components/ProtectedRoute'
 import NotFound from './components/NotFound'
@@ -2588,7 +2588,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/login" component={Login} />
           <ProtectedRoute exact path="/" component={Home} />
-          <ProtectedRoute exact path="/report" component={Report} />
+          <ProtectedRoute exact path="/reports" component={Reports} />
           <Route path="/not-found" component={NotFound} />
           <Redirect to="not-found" />
         </Switch>
