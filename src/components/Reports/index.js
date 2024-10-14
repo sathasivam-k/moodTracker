@@ -49,6 +49,14 @@ const Reports = () => (
         })
       })
 
+      // Custom tick component to render images as labels
+      const CustomXAxisTick = ({x, y, payload}) => (
+        <g transform={`translate(${x},${y})`}>
+          {/* Render the emoji image as the tick label */}
+          <image href={payload.value} width={30} height={30} x={-20} y={-2} />
+        </g>
+      )
+
       return (
         <div className="reportBg">
           <Header />
@@ -137,6 +145,15 @@ const Reports = () => (
                 strokeDasharray="5 5"
                 axisLine={false}
                 tickLine={false}
+                tick={({x, y, payload}) => (
+                  <CustomXAxisTick
+                    x={x}
+                    y={y}
+                    payload={{
+                      value: emojiesMonthwiseCount[payload.value - 1].emojiUrl,
+                    }}
+                  />
+                )}
               />
               <YAxis
                 tickFormatter={DataFormatter}
